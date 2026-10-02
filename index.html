@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Nandita Chowdhury</title>
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&display=swap" rel="stylesheet">
+<style>
+
+  :root{
+    --white:#fffdfb;
+    --blush:#fbe4ea;
+    --pink:#e8a9bd;
+    --pink-deep:#c96c8c;
+    --pink-ink:#9e3f63;
+    --black:#1b1515;
+    --black-soft:#241c1c;
+    color-scheme:light;
+  }
+  *,*::before,*::after{ box-sizing:border-box; }
+
+  html{
+    scroll-behavior:smooth;
+    scroll-padding-top:70px;
+  }
+  body{
+    margin:0;
+    background:var(--white);
+    color:var(--black);
+    font-family:'Cormorant Garamond', serif;
+    overflow-x:hidden;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .petal, .hero-name, .reveal{ animation:none !important; opacity:1 !important; transform:none !important; }
+  }
+
+  /* ---------------- falling petals (fixed, whole-page) ---------------- */
+  .petals{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:5;
+    overflow:hidden;
+  }
+  .petal{
+    position:absolute;
+    top:-8%;
+    width:14px;
+    height:14px;
+    background:linear-gradient(135deg, var(--pink), var(--pink-deep));
+    border-radius:0% 60% 60% 60%;
+    opacity:0.55;
+    animation-name:fall;
+    animation-timing-function:linear;
+    animation-iteration-count:infinite;
+  }
+  @keyframes fall{
+    0%{ transform:translate(0,0) rotate(0deg); opacity:0; }
+    8%{ opacity:0.6; }
+    92%{ opacity:0.5; }
+    100%{ transform:translate(var(--drift,40px), 112vh) rotate(340deg); opacity:0; }
+  }
+
+  /* ---------------- nav ---------------- */
+  nav.topnav{
+    position:fixed;
+    top:env(safe-area-inset-top,0px);
+    left:0; right:0;
+    z-index:30;
+    display:flex;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:space-between;
+    row-gap:0.4rem;
+    padding:0.85rem clamp(1rem,4vw,3rem);
+    background:rgba(255,253,251,0.78);
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(27,21,21,0.08);
+  }
+  .brand{
+    font-family:'Pinyon Script', cursive;
+    font-size:clamp(1.4rem,5vw,1.9rem);
+    color:var(--black);
+    text-decoration:none;
+    letter-spacing:0.02em;
+    white-space:nowrap;
+  }
+  .navlinks{
+    display:flex;
+    gap:clamp(0.9rem,3vw,2.2rem);
+  }
+  .navlinks a{
+    position:relative;
+    text-decoration:none;
+    color:var(--black-soft);
+    font-family:'Playfair Display', serif;
+    font-weight:500;
+    font-style:italic;
+    font-size:clamp(0.85rem,2.4vw,1.05rem);
+    letter-spacing:0.02em;
+    padding-bottom:2px;
+    white-space:nowrap;
+  }
+  .navlinks a::after{
+    content:"";
+    position:absolute;
+    left:0; right:100%;
+    bottom:-2px;
+    height:1px;
+    background:var(--pink-deep);
+    transition:right 0.4s ease;
+  }
+  .navlinks a:hover::after{ right:0; }
+  .navlinks a:hover{ color:var(--pink-ink); }
+
+  /* ---------------- hero ---------------- */
+  .hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:7rem 1.5rem 3rem;
+    position:relative;
+    background:
+      radial-gradient(ellipse at 15% 20%, rgba(232,169,189,0.35), transparent 55%),
+      radial-gradient(ellipse at 85% 80%, rgba(232,169,189,0.3), transparent 55%),
+      var(--white);
+  }
+  .flourish{
+    width:120px;
+    height:auto;
+    margin-bottom:1.4rem;
+    opacity:0.85;
+  }
+  .hero-name{
+    font-family:'Pinyon Script', cursive;
+    font-size:clamp(3.2rem,10vw,6.5rem);
+    color:var(--black);
+    line-height:1;
+    margin:0;
+    animation:riseIn 1.4s ease both;
+  }
+  @keyframes riseIn{
+    from{ opacity:0; transform:translateY(22px); }
+    to{ opacity:1; transform:translateY(0); }
+  }
+  .hero-sub{
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:clamp(1.05rem,2vw,1.35rem);
+    color:var(--pink-ink);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-top:0.9rem;
+  }
+  .hero-tag{
+    max-width:480px;
+    margin:1.6rem auto 0;
+    font-size:1.25rem;
+    color:#4a3d3d;
+    line-height:1.6;
+  }
+  .scroll-cue{
+    margin-top:3rem;
+    width:1px;
+    height:46px;
+    background:linear-gradient(var(--pink-deep), transparent);
+    position:relative;
+  }
+  .scroll-cue::after{
+    content:"";
+    position:absolute;
+    left:50%; top:0;
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--pink-deep);
+    transform:translateX(-50%);
+    animation:cueMove 2.2s ease-in-out infinite;
+  }
+  @keyframes cueMove{
+    0%,100%{ top:0; opacity:1; }
+    50%{ top:38px; opacity:0.2; }
+  }
+
+  /* ---------------- shared section styles ---------------- */
+  section{
+    position:relative;
+    padding:6rem clamp(1.5rem,6vw,4rem);
+    z-index:2;
+  }
+  .section-head{
+    text-align:center;
+    margin-bottom:3rem;
+  }
+  .eyebrow{
+    display:block;
+    font-family:'Playfair Display', serif;
+    font-style:italic;
+    letter-spacing:0.25em;
+    text-transform:uppercase;
+    font-size:0.8rem;
+    margin-bottom:0.6rem;
+  }
+  .section-title{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:clamp(2.2rem,5vw,3.2rem);
+    margin:0;
+  }
+  .divider-flower{
+    width:34px;
+    height:auto;
+    margin:1.1rem auto 0;
+    opacity:0.9;
+  }
+
+  .reveal{
+    opacity:0;
+    transform:translateY(26px);
+    transition:opacity 0.9s ease, transform 0.9s ease;
+  }
+  .reveal.in-view{
+    opacity:1;
+    transform:translateY(0);
+  }
+
+  /* ---------------- about (black band) ---------------- */
+  #about{
+    background:var(--black);
+    color:var(--white);
+  }
+  #about .eyebrow{ color:var(--pink); }
+  #about .section-title{ color:var(--white); }
+  .about-wrap{
+    max-width:720px;
+    margin:0 auto;
+    position:relative;
+  }
+  .about-wrap p{
+    font-weight:500;
+    font-size:clamp(1.15rem,2vw,1.45rem);
+    line-height:1.75;
+    color:#f3e7ec;
+    margin:0 0 1.5rem;
+  }
+  .about-wrap p:first-of-type::first-letter{
+    font-family:'Playfair Display', serif;
+    font-weight:700;
+    font-size:3.2em;
+    float:left;
+    line-height:0.85;
+    padding-right:0.1em;
+    color:var(--pink);
+  }
+
+  /* ---------------- hobbies ---------------- */
+  #hobbies{ background:var(--white); }
+  #hobbies .eyebrow{ color:var(--pink-ink); }
+  .hobby-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+    gap:1rem;
+    max-width:980px;
+    margin:0 auto;
+  }
+  .hobby-chip{
+    display:flex;
+    align-items:center;
+    gap:0.65rem;
+    padding:1rem 1.3rem;
+    border:1px solid rgba(201,108,140,0.3);
+    border-radius:999px;
+    background:linear-gradient(180deg, rgba(251,228,234,0.5), rgba(255,255,255,0));
+    font-weight:600;
+    font-size:1.08rem;
+    color:var(--black-soft);
+    transition:transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+  }
+  .hobby-chip svg{ width:18px; height:18px; stroke:var(--pink-deep); fill:none; stroke-width:1.5; flex-shrink:0; }
+  .hobby-chip:hover{
+    transform:translateY(-3px);
+    border-color:var(--pink-deep);
+    background:linear-gradient(180deg, rgba(251,228,234,0.9), rgba(251,228,234,0.2));
+  }
+
+  /* ---------------- connect ---------------- */
+  #connect{
+    background:linear-gradient(180deg, var(--blush), #fdf2f5);
+    text-align:center;
+  }
+  #connect .eyebrow{ color:var(--pink-ink); }
+  .connect-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:2.2rem;
+    max-width:720px;
+    margin:0 auto;
+  }
+  .connect-item{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:0.8rem;
+    text-decoration:none;
+    color:var(--black-soft);
+    width:150px;
+  }
+  .connect-ring{
+    width:76px; height:76px;
+    border-radius:50%;
+    border:1.5px solid var(--pink-deep);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:var(--white);
+    transition:background 0.35s ease, transform 0.35s ease;
+  }
+  .connect-ring svg{ width:28px; height:28px; stroke:var(--pink-ink); fill:none; stroke-width:1.5; transition:stroke 0.35s ease; }
+  .connect-item:hover .connect-ring{
+    background:var(--black);
+    transform:translateY(-4px) scale(1.04);
+  }
+  .connect-item:hover .connect-ring svg{ stroke:var(--pink); }
+  .connect-label{
+    font-family:'Playfair Display', serif;
+    font-weight:600;
+    font-size:1.05rem;
+  }
+  .connect-sub{
+    font-size:0.85rem;
+    color:#6b5a5a;
+    word-break:break-word;
+  }
+
+  /* ---------------- footer ---------------- */
+  footer{
+    background:var(--black);
+    color:var(--pink);
+    text-align:center;
+    padding:2.4rem 1.5rem;
+    font-family:'Pinyon Script', cursive;
+    font-size:1.6rem;
+    position:relative;
+    z-index:2;
+  }
+  footer small{
+    display:block;
+    font-family:'Cormorant Garamond', serif;
+    font-size:0.85rem;
+    color:#c9a3b2;
+    margin-top:0.4rem;
+    letter-spacing:0.04em;
+  }
+
+  /* ---------------- responsive breakpoints ---------------- */
+
+  /* large screens: keep line lengths and the hero comfortable to read */
+  @media (min-width:1400px){
+    .hero-tag{ max-width:560px; }
+    .about-wrap{ max-width:800px; }
+    .hobby-grid{ max-width:1100px; }
+  }
+
+  /* tablets and small laptops */
+  @media (max-width:860px){
+    section{ padding:5rem clamp(1.3rem,5vw,3rem); }
+    .hobby-grid{ grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); }
+  }
+
+  /* phones */
+  @media (max-width:600px){
+    html{ scroll-padding-top:120px; }
+    .hero{ padding:8.5rem 1.2rem 3rem; min-height:auto; }
+    .flourish{ width:88px; }
+    .hero-tag{ font-size:1.1rem; }
+    section{ padding:4rem 1.2rem; }
+    .section-head{ margin-bottom:2.2rem; }
+    .about-wrap p{ margin:0 0 1.2rem; }
+    .hobby-grid{ grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:0.75rem; }
+    .hobby-chip{ padding:0.8rem 1rem; font-size:0.98rem; }
+    .connect-grid{ gap:1.4rem 1.6rem; }
+    .connect-item{ width:120px; }
+    .connect-ring{ width:64px; height:64px; }
+    .connect-ring svg{ width:24px; height:24px; }
+  }
+
+  /* very small phones */
+  @media (max-width:380px){
+    .navlinks{ gap:0.7rem; }
+    .brand{ font-size:1.3rem; }
+    .hero-name{ font-size:2.6rem; }
+    .hero-sub{ letter-spacing:0.05em; }
+    .about-wrap p:first-of-type::first-letter{ font-size:2.6em; }
+    .connect-grid{ gap:1.2rem; }
+    .connect-item{ width:100px; }
+  }
+
+  /* short / landscape phones: the hero shouldn't force extra scrolling */
+  @media (max-height:480px) and (orientation:landscape){
+    .hero{ min-height:auto; padding:7rem 1.5rem 2.5rem; }
+    .scroll-cue{ display:none; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="petals" id="petals"></div>
+
+  <nav class="topnav">
+    <a href="#top" class="brand">N. Chowdhury</a>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#hobbies">Hobbies</a>
+      <a href="#connect">Connect</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <svg class="flourish" viewBox="0 0 120 60" fill="none">
+      <path d="M10 30 C 30 10, 50 10, 60 30 C 70 10, 90 10, 110 30" stroke="#c96c8c" stroke-width="1.2"/>
+      <circle cx="60" cy="30" r="4" fill="#e8a9bd"/>
+      <circle cx="46" cy="24" r="2.4" fill="#e8a9bd"/>
+      <circle cx="74" cy="24" r="2.4" fill="#e8a9bd"/>
+    </svg>
+    <h1 class="hero-name">Nandita Chowdhury</h1>
+    <span class="hero-sub">Creator · Coder · Dreamer</span>
+    <p class="hero-tag">A little garden of my work, my thoughts, and the things I love — tended with care, grown with curiosity.</p>
+    <div class="scroll-cue"></div>
+  </header>
+
+  <section id="about">
+    <div class="section-head reveal">
+      <span class="eyebrow">Get to know me</span>
+      <h2 class="section-title">About</h2>
+      <svg class="divider-flower" viewBox="0 0 34 34" fill="none">
+        <circle cx="17" cy="17" r="3" fill="#e8a9bd"/>
+        <circle cx="17" cy="8" r="4" fill="none" stroke="#e8a9bd" stroke-width="1.2"/>
+        <circle cx="17" cy="26" r="4" fill="none" stroke="#e8a9bd" stroke-width="1.2"/>
+        <circle cx="8" cy="17" r="4" fill="none" stroke="#e8a9bd" stroke-width="1.2"/>
+        <circle cx="26" cy="17" r="4" fill="none" stroke="#e8a9bd" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="about-wrap reveal">
+      <p>I am a curious, hardworking, and responsible person who enjoys learning new things and improving my skills. I have a calm and friendly personality, and I try to work well with others while also taking responsibility for my own work. I believe in being disciplined, consistent, and open to learning from my mistakes.</p>
+      <p>I have good leadership qualities and enjoy taking initiative when working on projects or group activities. I try to understand everyone's ideas, communicate clearly, and help the team work towards a common goal. I believe that a good leader should not only guide others but also listen to them and take responsibility.</p>
+      <p>One of my main interests is coding and computer science. I enjoy solving problems through programming and learning how software and applications are developed. I have experience with programming languages such as Java and Python, and I also have knowledge of HTML for creating web pages. I am particularly interested in improving my programming and problem-solving skills and exploring new areas of technology.</p>
+      <p>Overall, I consider myself a motivated learner who is always willing to develop new skills, take on challenges, and work towards becoming better at what I do.</p>
+    </div>
+  </section>
+
+  <section id="hobbies">
+    <div class="section-head reveal">
+      <span class="eyebrow">What I love</span>
+      <h2 class="section-title">Hobbies</h2>
+      <svg class="divider-flower" viewBox="0 0 34 34" fill="none">
+        <circle cx="17" cy="17" r="3" fill="#c96c8c"/>
+        <circle cx="17" cy="8" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+        <circle cx="17" cy="26" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+        <circle cx="8" cy="17" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+        <circle cx="26" cy="17" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="hobby-grid reveal">
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Painting and drawing</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Oil painting</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Handicrafts &amp; DIY work</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Poster making &amp; designing</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Stitching &amp; craft activities</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Exploring new places</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Discovering new foods</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Spending time in nature</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Coding &amp; programming</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Graphic &amp; creative design</div>
+      <div class="hobby-chip"><svg viewBox="0 0 24 24"><path d="M12 3c3 2 5 5 5 8a5 5 0 0 1-10 0c0-3 2-6 5-8Z"/></svg>Experimenting with new ideas</div>
+    </div>
+  </section>
+
+  <section id="connect">
+    <div class="section-head reveal">
+      <span class="eyebrow">Let's bloom together</span>
+      <h2 class="section-title">Connect</h2>
+      <svg class="divider-flower" viewBox="0 0 34 34" fill="none">
+        <circle cx="17" cy="17" r="3" fill="#c96c8c"/>
+        <circle cx="17" cy="8" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+        <circle cx="17" cy="26" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+        <circle cx="8" cy="17" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+        <circle cx="26" cy="17" r="4" fill="none" stroke="#c96c8c" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="connect-grid reveal">
+      <a class="connect-item" href="https://www.instagram.com/invites/contact/?utm_content=qg752t0&stkn=1b8rufw7jv92c" target="_blank" rel="noopener">
+        <span class="connect-ring"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span>
+        <span class="connect-label">Instagram</span>
+        <span class="connect-sub">say hello</span>
+      </a>
+      <a class="connect-item" href="https://github.com/TechBuddy365/my_java_programs.git" target="_blank" rel="noopener">
+        <span class="connect-ring"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.46-1.16-1.11-1.47-1.11-1.47-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.89 1.52 2.34 1.08 2.91.83.09-.65.35-1.08.63-1.33-2.22-.25-4.56-1.11-4.56-4.95 0-1.09.39-1.99 1.03-2.69-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.03a9.6 9.6 0 0 1 5 0c1.91-1.3 2.75-1.03 2.75-1.03.55 1.37.2 2.39.1 2.64.64.7 1.03 1.6 1.03 2.69 0 3.85-2.35 4.7-4.58 4.94.36.31.68.92.68 1.85v2.75c0 .26.18.58.69.48A10 10 0 0 0 12 2Z"/></svg></span>
+        <span class="connect-label">GitHub</span>
+        <span class="connect-sub">my_java_programs</span>
+      </a>
+      <a class="connect-item" href="mailto:chowdhurynandita413@gmail.com">
+        <span class="connect-ring"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 6.5 12 13l9-6.5"/></svg></span>
+        <span class="connect-label">Email</span>
+        <span class="connect-sub">chowdhurynandita413@gmail.com</span>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    with love &amp; petals
+    <small>Nandita Chowdhury</small>
+  </footer>
+
+<script>
+  (function(){
+    // scatter falling petals
+    var field = document.getElementById('petals');
+    var count = 16;
+    for(var i=0;i<count;i++){
+      var p = document.createElement('div');
+      p.className = 'petal';
+      var left = Math.random()*100;
+      var size = 9 + Math.random()*10;
+      var duration = 12 + Math.random()*14;
+      var delay = Math.random()*-20;
+      var drift = (Math.random()*80 - 40) + 'px';
+      p.style.left = left + 'vw';
+      p.style.width = size + 'px';
+      p.style.height = size + 'px';
+      p.style.animationDuration = duration + 's';
+      p.style.animationDelay = delay + 's';
+      p.style.setProperty('--drift', drift);
+      field.appendChild(p);
+    }
+
+    // scroll reveal
+    var items = document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){
+            entry.target.classList.add('in-view');
+            io.unobserve(entry.target);
+          }
+        });
+      }, { threshold:0.18 });
+      items.forEach(function(el){ io.observe(el); });
+    } else {
+      items.forEach(function(el){ el.classList.add('in-view'); });
+    }
+  })();
+</script>
+
+</body>
+</html>
